@@ -14,7 +14,7 @@ export const FlowContext = createContext({
 
 // Function to update policy data in the backend
 const updatePolicy = (dados) => {
-  const url = "http://localhost/endpoint";
+  const url = "http://127.0.0.1:8000/api/configBackend";
   return fetch(url, {
     method: "PUT",
     headers: {
@@ -32,9 +32,11 @@ const updatePolicy = (dados) => {
     })
     .then((data) => {
       console.log("Dados atualizados com sucesso:", data);
+      alert("Dados atualizados com sucesso:", data)
     })
     .catch((error) => {
       console.error("Ocorreu um erro ao atualizar os dados:", error);
+      alert("Ocorreu um erro ao atualizar os dados:", error)
     });
 };
 // Flow provider component
@@ -113,37 +115,34 @@ export const FlowProviderContext = ({ children }) => {
 
   // Function to generate a policy based on the graph structure
   function generatePolicy() {
-    var obj = {};
-
+    var obj = [];
+  
     nodes.forEach((node) => {
       const edgesArray = getEdges(node.id);
-
+  
       edgesArray.forEach((edge) => {
         if (
-          (edge.label == "yes") &
-          (findNode(edge.target).data.label != "decision = false")
+          edge.label === "yes" &&
+          findNode(edge.target).data.label !== "decision = false"
         ) {
           const properties = node.data.label.split(" ");
-
-          obj = {
-            ...obj,
-            [node.id]: {
-              variable: properties[0],
-              operator: properties[1],
-              value: properties[2],
-            },
-          };
+  
+          obj.push({
+            variable: properties[0],
+            operator: properties[1],
+            value: properties[2],
+          });
         }
       });
     });
-    console.log(obj);
+   
     return obj;
   }
 
   // Function to save changes
   const saveChanges = () => {
-    //updatePolicy(generatePolicy());
-    console.log(generatePolicy());
+   updatePolicy(generatePolicy());
+    //console.log(JSON.stringify(generatePolicy()));
   };
 
   // Function to find a node by ID
