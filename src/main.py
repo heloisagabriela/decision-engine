@@ -14,4 +14,10 @@ def getInfo(age: int, incoming: int):
 # Route to update rules by creating a new csv
 @app.post("/api/configBackend/")
 async def updateRule(data: List[Dict[str, Any]]):
-    return updateRules(data)
+    try:
+        if data == [{}]:
+            print("It is necessary to fill in the body")
+        else:
+            return updateRules(data)
+    except Exception as e:
+        print(f"Error: {e}")
