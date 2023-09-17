@@ -1,0 +1,18 @@
+# Arquivos gerados pelo Vite
+node_modules/
+dist/
+.eslintcache
+
+# Arquivos gerados pelo React
+build/
+*.log
+
+# Outros arquivos que podem ser ignorados (personalize conforme necessário)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
