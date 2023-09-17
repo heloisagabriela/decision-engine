@@ -67,7 +67,7 @@ export const FlowProviderContext = ({ children }) => {
     {
       id: "4",
       type: "default",
-      data: { label: "incoming > 1000" },
+      data: { label: "incoming >= 1000" },
       position: { x: 250, y: 87 },
 
       markerStart: "EdgeMarkerType",
