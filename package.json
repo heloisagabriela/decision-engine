@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "start-frontend": "cd ./configfrontend && npm install && npm run dev",
+    "start-backend": "cd ./configbackend/src && pip install fastapi && pip install uvicorn && pip install pandas && uvicorn main:app --reload"
+  }
+}
